@@ -1,8 +1,9 @@
 body{
-    background: linear-gradient(120deg, #1db954, #191414);
+    background-color: #2895ad;
+    color: rgb(90, 84, 206);
 }
 h1{
-    color: white;
+    color: rgb(90, 84, 206);;
     font-weight: bold;
     text-align: center;
     font-size: 5vw;
