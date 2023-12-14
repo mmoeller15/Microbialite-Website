@@ -56,7 +56,9 @@ app.post('/macro', (req, res) => {});
 app.post('/micro', (req, res) => {});
 app.post('/thin', (req, res) => {});
 app.post('/photo', (req, res) => {});
-app.post('/employee', (req, res) => {});
+app.post('/employee', (req, res) => {
+    console.log(req.body);
+});
 app.post('/analyze', (req, res) => {});
 app.post('/problem', (req, res) => {});
 
