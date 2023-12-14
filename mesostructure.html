@@ -32,6 +32,7 @@
 </head>
 
 <body>
+    <!-- MAIN CONTENT -->
     <div class="off-canvas-content" data-off-canvas-content>
         <div class="grid-container">
             <div class="grid-x grid-padding-x"> 
@@ -42,7 +43,15 @@
 
             <div class="grid-x grid-padding-x"> 
                 <div class="cell small-11 medium-10 large-10 headstyle">
-                    <h2 style="text-align: left;">Add a Mesostructure</h2>
+                    <form id="operationForm">
+                        <label for="operation">Choose an operation:</label>
+                        <select id="operation" name="operation">
+                          <option value="select">SELECT</option>
+                          <option value="insert">INSERT</option>
+                          <option value="delete">DELETE</option>
+                        </select>
+                        <br><br><br>
+                    </form>
                 </div>
             </div>
 
@@ -52,46 +61,58 @@
                     <form id="addmeso" title="addmeso">
                         <div class="row">
                             <div class="small-12 medium-6 large-8 columns form-input">
-                                <label for="macroid">Macrostructure ID:</label>
-                                <input type="text" id="m_type"></input>
+                                <label>Mesostructure ID
+                                <input type="text" id="mesostructureID" name="MesostructureID" placeholder="Enter a MesostructureID">
+                                </label>
                             </div>
                             <div class="small-12 medium-6 large-8 columns form-input">
-                                <label for="m_type">Type:</label>
-                                <input type="text" id="m_type"></input>
+                                <label>Macrostructure ID
+                                <input type="text" id="macrostructureID" name="MacrostructureID" placeholder="Enter a MacrostructureID">
+                                </label>
                             </div>
                             <div class="small-12 medium-6 large-8 columns form-input">
-                                <label for="igsn">IGSN Intl Geo Sample:</label>
-                                <input type="text" id="igsn"></input>
+                                <label>Type
+                                <input type="text" id="mesotype" name="MesostructureType" placeholder="Enter a Mesostructure Type">
+                                </label>
                             </div>
                             <div class="small-12 medium-6 large-8 columns form-input">
-                                <label for="fru">FRU Interval:</label>
+                                <label>IGSN Intl Geo Sample
+                                <input type="text" id="igsn" name="igsn" placeholder="Enter IGSN">
+                                </label>
+                            </div>
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label>FRU Interval:</label>
                                 <select id="fru">
                                     <option value="True">Yes</option>
                                     <option value="False">No</option>
                                 </select>
                             </div>
                             <div class="small-12 medium-6 large-8 columns form-input">
-                                <label for="tsprio">Thin Section Priority:</label>
-                                <input type="text" id="tsprio"></input>
+                                <label>Thin Section Priority
+                                <input type="text" id="tsprio" name="thinSectionPriority" placeholder="Enter Thin Section Priority">
+                                </label>
                             </div>
                             <div class="small-12 medium-6 large-8 columns form-input">
-                                <label for="tsm">Thin Section Made:</label>
+                                <label>Thin Section Made:</label>
                                 <select id="tsm">
                                     <option value="True">Yes</option>
                                     <option value="False">No</option>
                                 </select>
                             </div>
                             <div class="small-12 medium-6 large-8 columns form-input">
-                                <label for="fdesc">Field Description:</label>
-                                <input type="text" id="fdesc"></input>
+                                <label>Field Description
+                                <input type="text" id="fdesc" name="fieldDesc" placeholder="Enter Field Description">
+                                </label>
                             </div>
                             <div class="small-12 medium-6 large-8 columns form-input">
-                                <label for="rdesc">Rock Description:</label>
-                                <input type="text" id="rdesc"></input>
+                                <label>Rock Description
+                                <input type="text" id="rdesc" name="rockDesc" placeholder="Enter Rock Description">
+                                </label>
                             </div>
                             <div class="small-12 medium-6 large-8 columns form-input">
-                                <label for="com">Comments:</label>
-                                <input type="text" id="com"></input>
+                                <label>Comments
+                                <input type="text" id="com" name="comments" placeholder="Enter additional comments">
+                                </label>
                             </div>
                             <div class="small-12 columns large-8 form-input">
                                 <!--- submit --->
@@ -106,7 +127,6 @@
         </div>
 
     </div>
-    <!-- MAIN CONTENT -->
 
     <!-- javascript -->
     <script type="application/javascript">
@@ -114,32 +134,36 @@
 
         const validateForm = () => {
             let containsErrors = false;
-            const f_inputs = document.getElementById("addmeso").elements;
-        
-            let structure = {
-                macroid : f_inputs[0].value,
-                type: f_inputs[1].value, //VARCHAR(255)
-                igsn: f_inputs[2].value, //VARCHAR(255)
-                fru: f_inputs[3].value, //BOOLEAN
-                tsprio: f_inputs[4].value, //BIGINT
-                tsm: f_inputs[5].value, //BOOLEAN
-                fdesc: f_inputs[6].value, //TEXT
-                rdesc: f_inputs[7].value, //TEXT
-                com: f_inputs[8].value //TEXT
+            const f_inputs = document.getElementById("addmeso");
+
+            for (let i=2; i<10; i++){
+                if (f_inputs[i].value.length == 0){
+                    f_inputs[i].value = "NULL";
+                }
             }
-            
-            console.log("hola");
-            console.log(structure);
+
+            let structure = {
+                mesoid : f_inputs[0].value, //int auto increment
+                macroid : f_inputs[1].value, //int not null?
+                type: f_inputs[2].value, //VARCHAR(255)
+                igsn: f_inputs[3].value, //VARCHAR(255)
+                fru: f_inputs[4].value, //BOOLEAN
+                tsprio: f_inputs[5].value, //BIGINT
+                tsm: f_inputs[6].value, //BOOLEAN
+                fdesc: f_inputs[7].value, //TEXT
+                rdesc: f_inputs[8].value, //TEXT
+                com: f_inputs[9].value //TEXT
+            }
 
             //conditions
-            if (f_inputs[1].value.length == 0){
-                f_inputs[1].classList.add('error');
+            if (f_inputs[0].value.length == 0){
+                f_inputs[0].classList.add('error');
                 containsErrors = true;
             } else {
-                f_inputs[1].classList.remove('error');
+                f_inputs[0].classList.remove('error');
             }
 
-            if (f_inputs[1].value.length > 255){
+            if (f_inputs[1].value.length == 0){
                 f_inputs[1].classList.add('error');
                 containsErrors = true;
             } else {
@@ -153,34 +177,53 @@
                 f_inputs[2].classList.remove('error');
             }
 
-            if (isNaN(parseInt(f_inputs[4].value))) {
-                f_inputs[4].classList.add('error');
+            if (f_inputs[3].value.length > 255){
+                f_inputs[3].classList.add('error');
                 containsErrors = true;
             } else {
-                f_inputs[4].classList.remove('error');
+                f_inputs[3].classList.remove('error');
             }
 
+            if (f_inputs[5].value == "NULL"){
+                f_inputs[5].classList.remove('error');
+            } else if (isNaN(f_inputs[4].value)){
+                f_inputs[5].classList.add('error');
+                containsErrors = true;
+            } else {
+                f_inputs[5].classList.remove('error');
+            }
         
             if (containsErrors == false) {
                 addQuery(structure);
                 // clean
-                /*
                 for (let i = 0; i < f_inputs.length; i++) {
                     f_inputs[i].value = "";
-                }*/
+                }
                 containsErrors = false;
             }
         };
 
         const addQuery = (structure) => {
             event.preventDefault();
-            const mesoQuery = 'SELECT MAX(MesostructureID) FROM Mesostructure'
-            const insertQuery = 'INSERT INTO Mesostructure VALUES ('+ structure.macroid +', '+ structure.type+', NULL, NULL, NULL, NULL, NULL, NULL, "'+structure.igsn +'", '+structure.fru+', '+structure.tsprio+', '+structure.tsm+', '+structure.fdesc+', "'+structure.rdesc+'", '+structure.com+");";
+            const selectedOperation = document.getElementById('operation').value;
+            let query = "";
+            let mesostructureID = document.getElementById('mesostructureID').value;
 
-            console.log(insertQuery);
+            if(selectedOperation === "select"){
+              query = `SELECT * FROM Mesostructure WHERE MesostructureID = ${mesostructureID} `;
+            } else if(selectedOperation === "delete"){
+              query = `DELETE FROM Mesostructure WHERE MesostructureID = ${mesostructureID}`;
+            }else {
+              query = 'INSERT INTO Mesostructure VALUES ('+ structure.mesoid+', '+structure.macroid +', '+ structure.type+', NULL, NULL, NULL, NULL, NULL, NULL, "'+structure.igsn +'", '+structure.fru+', '+structure.tsprio+', '+structure.tsm+', '+structure.fdesc+', "'+structure.rdesc+'", '+structure.com+");";
+            }
+
+            const mesoQuery = 'SELECT MAX(MesostructureID) FROM Mesostructure'
+
+            console.log(query);
+            window.alert("Query Made");
 
             // Clear input fields
-            /*
+            structure.macroid.value = '';
             structure.type.value = '';
             structure.igsn.value = '';
             structure.fru.value = '';
@@ -189,7 +232,6 @@
             structure.fdesc.value = '';
             structure.rdesc.value = '';
             structure.com.value = '';
-            */
         }
   
         mesosub.addEventListener('click', validateForm);
