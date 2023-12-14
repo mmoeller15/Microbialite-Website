@@ -27,8 +27,7 @@
 
 <body>
     <h1>WAYPOINT DATA</h1>
-
-    <form id="myForm">
+    <form action="/way" method="post" id="myForm">
         <div class="grid-container">
             <div class="grid-x grid-padding-x">
 
@@ -135,93 +134,12 @@
                     <textarea id="Comments" name="Comments" placeholder="Comments"></textarea>
                 </div>
 
-              
-
-
-
                 <div class="cell small-12 large-12">
                 <input type="submit" value="Submit">
                 </div>
-
             </div>
         </div>
-
-        
     </form>
-
-    <script>
-        document.getElementById("myForm").addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevents the default form submission
-
-            // Get form data
-            let data = [];
-
-            // var WaypointID = document.getElementById("WaypointID").value;
-            // data.push(WaypointID);
-            
-            // var Title = document.getElementById("Title").value;
-            // var Longitude = document.getElementById("Longitude").value;
-
-            // // Process or use the form data as needed
-            // console.log("WaypointID:", WaypointID);
-            // console.log("Title:", Title);
-            
-
-
-
-
-            data.push(document.getElementById("WaypointID").value);
-            data.push("'" + document.getElementById("Title").value + "'");
-            data.push(document.getElementById("Longitude").value);
-            data.push(document.getElementById("Latitude").value);
-            data.push(document.getElementById("Northing").value);
-            data.push(document.getElementById("Easting").value);
-            data.push(document.getElementById("UTMZone1").value);
-            data.push("'" + document.getElementById("UTMZone2").value + "'");
-            data.push("'" + document.getElementById("Datum").value + "'");
-            data.push("'" + document.getElementById("Projection").value + "'");
-            data.push("'" + document.getElementById("FieldBook").value + "'");
-            data.push("'" + document.getElementById("FieldbookPage").value + "'");
-            data.push("'" + document.getElementById("Formation").value + "'");
-            data.push("'" + document.getElementById("SiteName").value + "'");
-            data.push("'" + document.getElementById("DateCollection").value + "'");
-            data.push(document.getElementById("Elevation").value);
-            data.push(document.getElementById("ProjectName").value);
-            data.push(document.getElementById("MeasuredSection").value);
-            data.push("'" + document.getElementById("SectionName").value + "'");
-            data.push("'" + document.getElementById("Comments").value + "'");
-
-
-
-            console.log(data)
-
-            //let query = "INSERT INTO Waypoint VALUES(" + data[0] + ", " + Title + ", " + Longitude + ")";
-
-            let query = "INSERT INTO Waypoint VALUES(" + data[0];
-            for(let i = 1; i < data.length;i++){
-                query = query + ', ';
-                query = query + data[i];
-            }
-            query = query + ')';
-
-            
-
-
-
-            console.log(query)
-
-        });
-    </script>
-
-    <body onload="initializeApp()">
-        <div id="app"></div>
-
-        <!-- Foundation CSS Framework: include before closing <body> tag -->
-        <script src="public\js\vendor"></script>
-        <script src="public\js\vendor\foundation.js"></script>
-        <script type="application/javascript">
-            $(document).foundation();
-        </script>
-    </body>
-
+    <script src="app.js"></script>
+</body>
 </html>
