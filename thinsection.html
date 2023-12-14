@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesostructure Data</title>
+    <link rel="stylesheet" href="public/css/foundation.css">
+    <link rel="stylesheet" href="public/css/style.css">  
+
+    <style>
+         textarea, input, button, label, p{
+            font-family: "Comic Sans MS";
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .form-input {
+            margin-bottom: 15px; 
+            font-family: "Comic Sans MS";
+            font-style: italic;
+            font-size: 1.1rem;
+        } 
+
+        .error {
+            border-style: solid;
+            border-width: 2px;
+            border-color: red;
+            background: pink;
+        }            
+    </style>
+</head>
+
+<body>
+    <!-- MAIN CONTENT -->
+    <div class="off-canvas-content" data-off-canvas-content>
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x"> 
+                <div class="cell small-11 medium-10 large-10 headstyle">
+                    <h1>Microbialite Database</h1>
+                </div>
+            </div>
+
+            <div class="grid-x grid-padding-x"> 
+                <div class="cell small-11 medium-10 large-10 headstyle">
+                    <form id="operationForm">
+                        <label for="operation">Choose an operation:</label>
+                        <select id="operation" name="operation">
+                          <option value="select">SELECT</option>
+                          <option value="insert">INSERT</option>
+                          <option value="delete">DELETE</option>
+                        </select>
+                        <br><br><br>
+                    </form>
+                </div>
+            </div>
+
+            <div class="grid-x grid-padding-x"> 
+                <div class="cell small-10 medium-10 large-10">
+                    <!--- inputs --->
+                    <form id="thinform" title="thinform">
+                        <div class="row">
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label>ThinSectionID
+                                <input type="text" id="thinSectionID" name="thinSectionID" placeholder="Enter a thinSectionID">
+                                </label>
+                            </div>
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label>MesostructureID
+                                <input type="text" id="mesostructureID" name="mesostructureID" placeholder="Enter a mesostructureID">
+                                </label>
+                            </div>
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label>Subsample
+                                <input type="text" id="subsample" name="subsample" placeholder="Enter subsample">
+                                </label>
+                            </div>
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label>Description
+                                <input type="text" id="desc" name="desc" placeholder="Enter description">
+                                </label>
+                            </div>
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label>Analysis Complete</label>
+                                <select id="analysis">
+                                    <option value="True">Yes</option>
+                                    <option value="False">No</option>
+                                </select>
+                            </div>
+                            <div class="small-12 columns large-8 form-input">
+                                <!--- submit --->
+                                <button id="thinsub">submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <!-- javascript -->
+    <script type="application/javascript">
+        let thinsub = document.getElementById("thinsub");
+
+        const validateForm = () => {
+            let containsErrors = false;
+            const f_inputs = document.getElementById("thinform");
+
+            let section = {
+                thinid : f_inputs[0].value, //int auto increment
+                mesoid : f_inputs[1].value, //int not null
+                subsample : f_inputs[2].value, //VARCHAR(255)
+                desc: f_inputs[3].value, //TEXT
+                analysis: f_inputs[4].value //BOOLEAN
+            }
+
+            //conditions
+            if (f_inputs[0].value.length == 0){
+                f_inputs[0].classList.add('error');
+                containsErrors = true;
+            } else if (isNaN(f_inputs[0].value)){
+                f_inputs[0].classList.add('error');
+                containsErrors = true;
+            } else {
+                f_inputs[0].classList.remove('error');
+            }
+
+            if (f_inputs[1].value.length == 0){
+                f_inputs[1].classList.add('error');
+                containsErrors = true;
+            } else if (isNaN(f_inputs[1].value)){
+                f_inputs[1].classList.add('error');
+                containsErrors = true;
+            } else {
+                f_inputs[1].classList.remove('error');
+            }
+
+            if (f_inputs[2].value.length > 255){
+                f_inputs[2].classList.add('error');
+                containsErrors = true;
+            } else {
+                f_inputs[2].classList.remove('error');
+            }
+
+        
+            if (containsErrors == false) {
+                addQuery(section);
+                // clean
+                for (let i = 0; i < 4; i++) {
+                    f_inputs[i].value = "";
+                }
+                containsErrors = false;
+            }
+        };
+
+        const addQuery = (section) => {
+            event.preventDefault();
+            const selectedOperation = document.getElementById('operation').value;
+            let query = "";
+            let thinSectionID = document.getElementById('thinSectionID').value;
+
+            if(selectedOperation === "select"){
+              query = `SELECT * FROM ThinSection WHERE ThinSectionID = ${thinSectionID} `;
+            } else if(selectedOperation === "delete"){
+              query = `DELETE FROM ThinSection WHERE ThinSectionID = ${thinSectionID}`;
+            }else {
+              query = 'INSERT INTO ThinSection VALUES ('+ section.thinid+', '+section.mesoid +', '+ section.subsample+', '+section.desc +', '+section.analysis+");";
+            }
+
+            console.log(query);
+            window.alert("Query Made");
+
+            // Clear input fields
+            section.thinid.value = '';
+            section.mesoid.value = '';
+            section.subsample.value = '';
+            section.desc.value = '';
+            section.analysis.value = '';
+        }
+  
+        thinsub.addEventListener('click', validateForm);
+    </script>
+
+    <!-- include before closing <body> tag -->
+    <script src="public/js/vendor/jquery.js"></script>
+    <script src="public/js/vendor/what-input.js"></script>
+    <script src="public/js/vendor/foundation.js"></script>
+    <script type="application/javascript">
+        $(document).foundation();
+    </script>
+</body>
+
+</html>
