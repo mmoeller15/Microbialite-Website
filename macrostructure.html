@@ -5,10 +5,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Macrostructure Data</title>
-        <link rel="stylesheet" href="pulic/css/foundation.css">
-        <link rel="stylesheet" href="public/css/style.css">  
+        <link rel="stylesheet" href="/public/css/foundation.css">
+        <link rel="stylesheet" href="/public/css/style.css">  
 
         <style>
+            body{
+                background-color:lavenderblush ;
+            }
              textarea, input, button, label, p{
                 font-family: "Comic Sans MS";
                 font-style: italic;
@@ -39,13 +42,23 @@
         </div>
     </div>
 
+    <form id="operationForm">
+      <label for="operation">Choose an operation:</label>
+      <select id="operation" name="operation">
+        <option value="select">SELECT</option>
+        <option value="insert">INSERT</option>
+        <option value="delete">DELETE</option>
+      </select>
+      <br><br><br>
+    </form>
+
     <div class="row">
         <div class="small-12 columns">
           <form id="userDataForm">
             <div class="row">
               <div class="small-12 medium-6 columns form-input">
                 <label>WaypointID
-                 <input type="text" name="WaypointID" placeholder="Enter a WaypointID">
+                 <input id="waypointID" type="text" name="WaypointID" placeholder="Enter a WaypointID">
                 </label>
               </div>
               <div class="small-12 medium-6 columns form-input">
@@ -74,11 +87,21 @@
       <script>
         document.getElementById('userDataForm').addEventListener('submit', function(event) {
             event.preventDefault();
+            const selectedOperation = document.getElementById('operation').value;
             const formData = new FormData(this);
-            const insertQuery = "INSERT INTO macrostructure (" + Array.from(formData.keys()).join(", ") + ") VALUES ('" + Array.from(formData.values()).join("', '") + "')";
-    
-            console.log(insertQuery);
-      
+            let query = "";
+            let waypointID = document.getElementById('waypointID').value;
+
+            if(selectedOperation === "select"){
+              query = `SELECT * FROM macrostructure WHERE WaypointID = ${waypointID} `;
+            } else if(selectedOperation === "delete"){
+              query = `DELETE FROM macrostructure WHERE WaypointID = ${waypointID}`;
+            }else {
+              query = "INSERT INTO macrostructure (" + Array.from(formData.keys()).join(", ") + ") VALUES ('" + Array.from(formData.values()).join("', '") + "')";
+            }
+             console.log(selectedOperation);
+             console.log(query);
+             window.alert("Query Made");
           });
           </script>
 </body>  
