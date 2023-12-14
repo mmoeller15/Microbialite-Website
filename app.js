@@ -15,9 +15,9 @@ const db = new sqlite3.Database('microbialite.sqlite3', (err) => {
     }
 });
 
-// app.get('', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'WayPointCreation.html'));
-// });
+app.get('', (req, res) => {
+    res.sendFile(path.join(__dirname, 'WayPointCreation.html'));
+});
 
 app.post('/way', (req, res) => {
     let data = [];
