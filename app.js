@@ -53,7 +53,7 @@ app.post('/way', (req, res) => {
 });
 
 app.post('/macro', (req, res) => {});
-app.post('/micro', (req, res) => {});
+app.post('/meso', (req, res) => {});
 app.post('/thin', (req, res) => {});
 app.post('/photo', (req, res) => {});
 app.post('/employee', (req, res) => {
