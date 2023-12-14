@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesostructure Data</title>
+    <link rel="stylesheet" href="public/css/foundation.css">
+    <link rel="stylesheet" href="public/css/style.css">  
+
+    <style>
+         textarea, input, button, label, p{
+            font-family: "Comic Sans MS";
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .form-input {
+            margin-bottom: 15px; 
+            font-family: "Comic Sans MS";
+            font-style: italic;
+            font-size: 1.1rem;
+        } 
+
+        .error {
+            border-style: solid;
+            border-width: 2px;
+            border-color: red;
+            background: pink;
+        }            
+    </style>
+</head>
+
+<body>
+    <div class="off-canvas-content" data-off-canvas-content>
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x"> 
+                <div class="cell small-11 medium-10 large-10 headstyle">
+                    <h1>Microbialite Database</h1>
+                </div>
+            </div>
+
+            <div class="grid-x grid-padding-x"> 
+                <div class="cell small-11 medium-10 large-10 headstyle">
+                    <h2 style="text-align: left;">Add a Mesostructure</h2>
+                </div>
+            </div>
+
+            <div class="grid-x grid-padding-x"> 
+                <div class="cell small-10 medium-10 large-10">
+                    <!--- inputs --->
+                    <form id="addmeso" title="addmeso">
+                        <div class="row">
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label for="macroid">Macrostructure ID:</label>
+                                <input type="text" id="m_type"></input>
+                            </div>
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label for="m_type">Type:</label>
+                                <input type="text" id="m_type"></input>
+                            </div>
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label for="igsn">IGSN Intl Geo Sample:</label>
+                                <input type="text" id="igsn"></input>
+                            </div>
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label for="fru">FRU Interval:</label>
+                                <select id="fru">
+                                    <option value="True">Yes</option>
+                                    <option value="False">No</option>
+                                </select>
+                            </div>
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label for="tsprio">Thin Section Priority:</label>
+                                <input type="text" id="tsprio"></input>
+                            </div>
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label for="tsm">Thin Section Made:</label>
+                                <select id="tsm">
+                                    <option value="True">Yes</option>
+                                    <option value="False">No</option>
+                                </select>
+                            </div>
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label for="fdesc">Field Description:</label>
+                                <input type="text" id="fdesc"></input>
+                            </div>
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label for="rdesc">Rock Description:</label>
+                                <input type="text" id="rdesc"></input>
+                            </div>
+                            <div class="small-12 medium-6 large-8 columns form-input">
+                                <label for="com">Comments:</label>
+                                <input type="text" id="com"></input>
+                            </div>
+                            <div class="small-12 columns large-8 form-input">
+                                <!--- submit --->
+                                <button id="mesosub">submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- MAIN CONTENT -->
+
+    <!-- javascript -->
+    <script type="application/javascript">
+        let mesosub = document.getElementById("mesosub");
+
+        const validateForm = () => {
+            let containsErrors = false;
+            const f_inputs = document.getElementById("addmeso").elements;
+        
+            let structure = {
+                macroid : f_inputs[0].value,
+                type: f_inputs[1].value, //VARCHAR(255)
+                igsn: f_inputs[2].value, //VARCHAR(255)
+                fru: f_inputs[3].value, //BOOLEAN
+                tsprio: f_inputs[4].value, //BIGINT
+                tsm: f_inputs[5].value, //BOOLEAN
+                fdesc: f_inputs[6].value, //TEXT
+                rdesc: f_inputs[7].value, //TEXT
+                com: f_inputs[8].value //TEXT
+            }
+            
+            console.log("hola");
+            console.log(structure);
+
+            //conditions
+            if (f_inputs[1].value.length == 0){
+                f_inputs[1].classList.add('error');
+                containsErrors = true;
+            } else {
+                f_inputs[1].classList.remove('error');
+            }
+
+            if (f_inputs[1].value.length > 255){
+                f_inputs[1].classList.add('error');
+                containsErrors = true;
+            } else {
+                f_inputs[1].classList.remove('error');
+            }
+
+            if (f_inputs[2].value.length > 255){
+                f_inputs[2].classList.add('error');
+                containsErrors = true;
+            } else {
+                f_inputs[2].classList.remove('error');
+            }
+
+            if (isNaN(parseInt(f_inputs[4].value))) {
+                f_inputs[4].classList.add('error');
+                containsErrors = true;
+            } else {
+                f_inputs[4].classList.remove('error');
+            }
+
+        
+            if (containsErrors == false) {
+                addQuery(structure);
+                // clean
+                /*
+                for (let i = 0; i < f_inputs.length; i++) {
+                    f_inputs[i].value = "";
+                }*/
+                containsErrors = false;
+            }
+        };
+
+        const addQuery = (structure) => {
+            event.preventDefault();
+            const mesoQuery = 'SELECT MAX(MesostructureID) FROM Mesostructure'
+            const insertQuery = 'INSERT INTO Mesostructure VALUES ('+ structure.macroid +', '+ structure.type+', NULL, NULL, NULL, NULL, NULL, NULL, "'+structure.igsn +'", '+structure.fru+', '+structure.tsprio+', '+structure.tsm+', '+structure.fdesc+', "'+structure.rdesc+'", '+structure.com+");";
+
+            console.log(insertQuery);
+
+            // Clear input fields
+            /*
+            structure.type.value = '';
+            structure.igsn.value = '';
+            structure.fru.value = '';
+            structure.tsprio.value = '';
+            structure.tsm.value = '';
+            structure.fdesc.value = '';
+            structure.rdesc.value = '';
+            structure.com.value = '';
+            */
+        }
+  
+        mesosub.addEventListener('click', validateForm);
+    </script>
+
+    <!-- include before closing <body> tag -->
+    <script src="public/js/vendor/jquery.js"></script>
+    <script src="public/js/vendor/what-input.js"></script>
+    <script src="public/js/vendor/foundation.js"></script>
+    <script type="application/javascript">
+        $(document).foundation();
+    </script>
+</body>
+
+</html>
