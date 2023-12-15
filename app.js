@@ -215,7 +215,25 @@ app.post('/macro', (req, res) => {
 
 
 
-app.post('/meso', (req, res) => {});
+app.post('/meso', (req, res) => {
+    let operation = req.body["operation"];
+    let table = "Mesostructure"
+    delete req.body.operation;
+    if (operation == "insert") {
+        dbInsert(table, req.body);
+    } else if (operation == "delete") {
+        dbDelete(table, req.body);
+    } else if (operation == "update") {
+        dbUpdate(table, req.body);
+    } else if (operation == "select") {
+        let promise = dbSelect(table, req.body);
+        promise.then((results) => {
+            console.log(results);
+            selectData(res, results);
+        })
+    }
+});
+
 app.post('/thin', (req, res) => {});
 app.post('/photo', (req, res) => {
     let operation = req.body["operation"];
