@@ -176,7 +176,6 @@ function selectData(res, results, table) {
     fs.readFile(__dirname + '/data.html', (err, template) => {
         let data = "";
         let response = template.toString();
-        console.log(table)
 
         response = response.replace('%%TITLE%%', table);
 
@@ -213,7 +212,6 @@ app.post('/way', (req, res) => {
     } else if (operation == "select") {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
-            console.log(results);
             selectData(res, results, table);
         })
     }
@@ -253,14 +251,12 @@ app.post('/meso', (req, res) => {
     } else if (operation == "select") {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
-            console.log(results);
             selectData(res, results, table);
         })
     }
 });
 
 app.post('/thin', (req, res) => {
-    console.log(req.body);
     let table = "ThinSection";
     let operation = req.body["operation"];
     delete req.body.operation
@@ -365,7 +361,6 @@ app.post('/photo', (req, res) => {
     let operation = req.body["operation"];
     let table = "Photo"
     let table2 = req.body["choice"] + "photo";
-    console.log(table2);
     delete req.body.choice;
     delete req.body.operation;
     let updatedJSON = Object.assign({},req.body);
@@ -383,7 +378,6 @@ app.post('/photo', (req, res) => {
         delete req.body.RockID;
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
-            console.log(results); 
             selectData(res, results);
         })
     }
@@ -403,7 +397,6 @@ app.post('/employee', (req, res) => {
     } else if (operation == "select") {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
-            console.log(results);
             selectData(res, results, table);
         })
     }
@@ -428,7 +421,6 @@ app.post('/analyze', (req, res) => {
     } else if (operation == "select") {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
-            console.log(results);
             selectData(res, results, table);
         })
     }
@@ -448,7 +440,6 @@ app.post('/problem', (req, res) => {
     } else if (operation == "select") {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
-            console.log(results);
             selectData(res, results, table);
         })
     }
