@@ -211,16 +211,11 @@ app.post('/macro', (req, res) => {
             selectData(res, results);
         })
     }
-
-
 });
 
 
 
 app.post('/meso', (req, res) => {});
-
-
-
 app.post('/thin', (req, res) => {});
 app.post('/photo', (req, res) => {});
 app.post('/employee', (req, res) => {
