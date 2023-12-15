@@ -57,5 +57,50 @@ button {
     text-align: center;
     text-decoration: none;
     display: inline-block;
+    border-radius: 4px;
     font-size: 16px;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+input[type=submit] {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 7px 14.9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+button[type=button] {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 10px 14.9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    cursor:pointer;
+}
+
+.button:hover{
+    background-color: #008CBA;
+}
+
+p {
+    margin-left: 100px;
+    margin-right: 100px;
+    color:rgb(33, 62, 97);
+    text-align: left;
 }

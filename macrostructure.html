@@ -25,6 +25,21 @@
                 font-size: 1.1rem;
             }             
         </style> -->
+        <style>
+          input {
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            padding: 7px 14.9px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-left: -10px;
+            margin-right: -10px;
+          }
+        </style>
     </head>
 
 <body>
@@ -48,38 +63,37 @@
     <div class="row">
         <div class="small-12 columns">
           <form action="/macro" method="post" id="myForm">
-
-            <label for="operation">Choose an operation:</label>
-            <select id="operation" name="operation">
-              <option value="select">SELECT</option>
-              <option value="insert">INSERT</option>
-              <option value="delete">DELETE</option>
-            </select>
+              <label style="margin-left: 100px;" for="operation">Choose an operation:</label>
+              <select style="margin-left: 100px; width: 1250px;" id="operation" name="operation">
+                <option value="select">SELECT</option>
+                <option value="insert">INSERT</option>
+                <option value="delete">DELETE</option>
+              </select>
             <br><br><br>
 
             <div class="row">
-              <div class="small-12 medium-6 columns form-input">
+              <div style="margin-left: 100px; margin-right: 100px;" class="small-12 medium-6 columns form-input">
                 <label>WaypointID
                  <input id="WaypointID" type="text" name="WaypointID" placeholder="Enter a WaypointID">
                 </label>
               </div>
-              <div class="small-12 medium-6 columns form-input">
+              <div style="margin-left: 100px; margin-right: 100px;" class="small-12 medium-6 columns form-input">
                 <label>MacrostructureType
                   <input type="text" name="MacrostructureType" placeholder="Enter a MacroType">
                 </label>
               </div>
-              <div class="small-12 medium-6 columns form-input">
+              <div style="margin-left: 100px; margin-right: 100px;" class="small-12 medium-6 columns form-input">
                 <label>MegastructureType
                   <input type="text" name="MegastructureType" placeholder="Enter a MegaType">
                 </label>
               </div>
-              <div class="small-12 columns form-input">
+              <div style="margin-left: 100px; margin-right: 100px;" class="small-12 columns form-input">
                 <label>Comments
                   <textarea name="Comments" placeholder="Enter any Comments"></textarea>
-                </label>
+                </label> 
               </div>
               <div class="small-12 columns form-input">
-                <input type="submit" class="button" value="Submit">
+                <input style="margin-left: 100px" type="submit" class="button" value="Submit">
               </div>
             </div>
           </form>
