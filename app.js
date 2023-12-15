@@ -250,23 +250,29 @@ app.post('/thin', (req, res) => {
 app.post('/photo', (req, res) => {
     let operation = req.body["operation"];
     let table = "Photo"
-    let table2 = req.body["choice"] + "Photo";
+    let table2 = req.body["choice"] + "photo";
+    console.log(table2);
     delete req.body.choice;
     delete req.body.operation;
+    let updatedJSON = Object.assign({},req.body);
+
     if (operation == "insert") {
+        delete req.body.RockID;
         dbInsert(table, req.body);
+        delete updatedJSON.photoData;
+        dbInsert(table2, updatedJSON);
     } else if (operation == "delete") {
         dbDelete(table, req.body);
     } else if (operation == "update") {
         dbUpdate(table, req.body);
     } else if (operation == "select") {
+        delete req.body.RockID;
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
-            console.log(results);
-            selectData(res, results, table);
+            console.log(results); 
+            selectData(res, results);
         })
     }
-
 });
 
 
