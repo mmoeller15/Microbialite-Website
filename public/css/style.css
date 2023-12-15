@@ -1,11 +1,12 @@
 body{
-    background-color: #2895ad;
+    background-color: #a3e1ef;
     color: rgb(90, 84, 206);
     font-family: "Comic Sans MS";
     font-style: italic;
 }
 h1{
-    color: rgb(90, 84, 206);;
+    color: rgb(90, 84, 206);
+    font-family: "Comic Sans MS";
     font-weight: bold;
     text-align: center;
     font-size: 5vw;
@@ -46,4 +47,15 @@ h2{
 }
 .link_button:hover {
     color:lightgray;
+}
+
+button {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 7px 14.9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }

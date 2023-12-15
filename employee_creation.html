@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="public/css/foundation.css">
+    <link rel="stylesheet" href="public/css/style.css">
+
+    <!-- MAIN CONTENT -->
+    <div class="grid-container">
+        <!-- `grid-x` represents a row -->
+        <a href="./login.html" target="_parent">
+            <button type="button">Employee Login</button>
+        </a>
+    </div>
+    <h1>Microbialite Database</h1>
+    <div class="grid-x grid-padding-x">
+        <div class="cell small-12 large-6">
+            <p>example text</p>
+        </div>
+    </div>
+    </div>
+
+
+
+</head>
+
+<body>
+    <div class="grid-x grid-padding-x"> 
+        <div class="cell small-12 large-6">      
+            <h1 style="font-family: 'Comic Sans MS' "> Add an Employee</h1>
+            <p> Please enter information that correlates with each attribute: </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-12 columns">
+          <form id="userDataForm">
+            <div class="row">
+              <div class="small-4 medium-4 columns form-input">
+                <label>First Name
+                 <input type="text" name="FirstName" placeholder="Enter Employee's First Name">
+                </label>
+              </div>
+              <div class="small-4 medium-4 columns form-input">
+                <label>Last Name
+                  <input type="text" name="LastName" placeholder="Enter Employee's Last Name">
+                </label>
+              </div>
+              <div class="small-4 medium-4 columns form-input">
+                <label for="Position">What kind of employee:</label>
+                    <select id="Position" name="Position">
+                        <option value = ""></option>
+                        <option value="researcher">RESEARCHER</option>
+                        <option value="support">CUSTOMER SUPPORT</option>
+                    </select>
+              </div>
+              <div class="small-12 columns form-input">
+                <input type="submit" class="button" value="Submit">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    <!--
+    <div id="app"></div>
+    <form id="employeeForm">
+        <div class="grid-container">
+          <div class="grid-x grid-padding-x">
+            <div class="medium-4 cell form-input">
+              <label>First Name
+                <input type="text" placeholder="Ex: John">
+              </label>
+            </div>
+            <div class="medium-4 cell form-input">
+              <label>Last Name
+                <input type="text" placeholder="Ex: Smith">
+              </label>
+            </div>
+            <div class="medium-4 cell form-input">
+                <label>Multiple Select Menu
+                    <select multiple>
+                      <option value="showboat">Customer Support</option>
+                      <option value="redwing">Researcher</option>
+                    </select>
+                </label>
+            </div>
+                <input type="submit" class="button" value="Submit">
+          </div>
+        </div>
+      </form>-->
+    <!-- Foundation CSS Framework: include before closing <body> tag -->
+    <script src="js/vendor.js"></script>
+    <script src="js/foundation.js"></script>
+    <script type="application/javascript">
+        $(document).foundation();
+    </script>
+    <script type="application/javascript">
+        document.getElementById('userDataForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const insertQuery = "INSERT INTO employee (" + Array.from(formData.keys()).join(", ") + ") VALUES ('" + Array.from(formData.values()).join("', '") + "')";
+    
+            console.log(insertQuery);
+      
+          });
+    </script>
+</body>
+
+</html>
