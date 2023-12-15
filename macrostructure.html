@@ -42,33 +42,33 @@
         </div>
     </div>
 
-    <form id="operationForm">
-      <label for="operation">Choose an operation:</label>
-      <select id="operation" name="operation">
-        <option value="select">SELECT</option>
-        <option value="insert">INSERT</option>
-        <option value="delete">DELETE</option>
-      </select>
-      <br><br><br>
-    </form>
-
+    
     <div class="row">
         <div class="small-12 columns">
-          <form id="userDataForm">
+          <form action="/macro" method="post" id="myForm">
+
+            <label for="operation">Choose an operation:</label>
+            <select id="operation" name="operation">
+              <option value="select">SELECT</option>
+              <option value="insert">INSERT</option>
+              <option value="delete">DELETE</option>
+            </select>
+            <br><br><br>
+
             <div class="row">
               <div class="small-12 medium-6 columns form-input">
                 <label>WaypointID
-                 <input id="waypointID" type="text" name="WaypointID" placeholder="Enter a WaypointID">
+                 <input id="WaypointID" type="text" name="WaypointID" placeholder="Enter a WaypointID">
                 </label>
               </div>
               <div class="small-12 medium-6 columns form-input">
-                <label>MacroType
-                  <input type="text" name="MacroType" placeholder="Enter a MacroType">
+                <label>MacrostructureType
+                  <input type="text" name="MacrostructureType" placeholder="Enter a MacroType">
                 </label>
               </div>
               <div class="small-12 medium-6 columns form-input">
-                <label>MegaType
-                  <input type="text" name="MegaType" placeholder="Enter a MegaType">
+                <label>MegastructureType
+                  <input type="text" name="MegastructureType" placeholder="Enter a MegaType">
                 </label>
               </div>
               <div class="small-12 columns form-input">
@@ -81,10 +81,17 @@
               </div>
             </div>
           </form>
+          <script src="app.js"></script>
         </div>
       </div>
+
+      
+     
+    </body>
+    </html>
+      
     
-      <script>
+      <!-- <script>
         document.getElementById('userDataForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const selectedOperation = document.getElementById('operation').value;
@@ -103,6 +110,5 @@
              console.log(query);
              window.alert("Query Made");
           });
-          </script>
-</body>  
-</html>
+          </script> -->
+ 
