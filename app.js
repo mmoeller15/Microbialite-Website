@@ -295,13 +295,29 @@ app.post('/employee', (req, res) => {
     }
 });
 app.post('/analyze', (req, res) => {
-
-
-
-
-
-
-
+    let operation = req.body["operation"];
+    let choice = req.body["choice"];
+    let table = "";
+    if(choice === "thinsection"){
+         table = "analyzing"+choice;
+    }else {
+     table = "analyzing"+req.body["choice"];
+    }
+    delete req.body.operation;
+    delete req.body.choice;
+    if (operation == "insert") {
+        dbInsert(table, req.body);
+    } else if (operation == "delete") {
+        dbDelete(table, req.body);
+    } else if (operation == "update") {
+        dbUpdate(table, req.body);
+    } else if (operation == "select") {
+        let promise = dbSelect(table, req.body);
+        promise.then((results) => {
+            console.log(results);
+            selectData(res, results);
+        })
+    }
 });
 
 
