@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS Macrostructure (
 
 CREATE TABLE IF NOT EXISTS Mesostructure (
     MesostructureID INTEGER PRIMARY KEY AUTOINCREMENT,
-    MacrostuctureID INTEGER REFERENCES Macrostructure(MacrostructureID) ON UPDATE CASCADE ON DELETE CASCADE,
+    MacrostructureID INTEGER REFERENCES Macrostructure(MacrostructureID) ON UPDATE CASCADE ON DELETE CASCADE,
     Type TEXT,
     Texture TEXT,
     LaminaThickness REAL DEFAULT 0,
