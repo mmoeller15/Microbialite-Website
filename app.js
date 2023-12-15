@@ -230,7 +230,6 @@ app.post('/macro', (req, res) => {
     } else if (operation == "select") {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
-            console.log(results);
             selectData(res, results, table);
         })
     }
