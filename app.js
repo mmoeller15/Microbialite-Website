@@ -3,6 +3,9 @@ var express = require('express');
 var http = require('http');
 var bodyParser = require('body-parser');
 
+var fs = require('fs');
+const { waitForDebugger } = require('inspector');
+
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -146,6 +149,26 @@ app.get('', (req, res) => {
     
 });
 
+
+function selectData(res, results) {
+    fs.readFile(__dirname + '/data.html', (err, template) => {
+        let data = "";
+        let response = template.toString();
+
+        for (let i = 0; i < results.length; i++) {
+            data = data + '<tr>';
+            for (const key in results[i]) {
+                data = data + '<td>' + results[i][key] + '</td>';
+            }
+            data = data + '</tr>';
+        }
+
+        response = response.replace('%%DATA%%', data);
+        res.status(200).type('html').send(response);
+    });
+}
+
+
 app.post('/way', (req, res) => {
     let operation = req.body["operation"];
     let table = "Waypoint"
@@ -160,10 +183,14 @@ app.post('/way', (req, res) => {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
             console.log(results);
+            selectData(res, results);
         })
     }
 
-    res.send("nice job!");
+
+   
+    
+    //res.sendFile(__dirname + '/WaypointData.html');
 });
 
 app.post('/macro', (req, res) => {});
@@ -184,10 +211,9 @@ app.post('/employee', (req, res) => {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
             console.log(results);
+            selectData(res, results);
         })
     }
-
-    res.send("nice job!");
 });
 app.post('/analyze', (req, res) => {});
 app.post('/problem', (req, res) => {});
