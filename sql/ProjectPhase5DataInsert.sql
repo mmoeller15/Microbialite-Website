@@ -1136,18 +1136,18 @@ VALUES
 (4,190),
 (4,191);
 
-INSERT INTO ProblemLog(CustomerSupportID, Comment)
+INSERT INTO ProblemLog(CustomerSupportID, Status, Comment)
 VALUES
-(1,"Some data was not being inserted into the database. Issue is now resolved"),
-(9,"Added names to employees who did not have first names"),
-(3,"Created new UI in website mock-up for users to navigate easier "),
-(4,"Added more macro and microstructure data to the database"),
-(9,"Seeing if test dummy object works when called"),
-(3, "Fixed problem where NULL values were being inserted into data rows"),
-(1,"Refactored old diagram to meet new standards."),
-(2,"Problem when inserting data resulting in multiple NULL values. Issue resolved."),
-(5,"Issue in the customer and order tables. They've been dropped...forever"),
-(6, "Got rid of employee sub-types and added a tag in the employee table to identify roles");
+(1,"In Progress", "Some data was not being inserted into the database. Issue is now resolved"),
+(9,"In Progress", "Added names to employees who did not have first names"),
+(3,"In Progress", "Created new UI in website mock-up for users to navigate easier "),
+(4,"In Progress", "Added more macro and microstructure data to the database"),
+(9,"In Progress","Seeing if test dummy object works when called"),
+(3,"Resolved", "Fixed problem where NULL values were being inserted into data rows"),
+(1,"Resolved", "Refactored old diagram to meet new standards."),
+(2,"Resolved", "Problem when inserting data resulting in multiple NULL values. Issue resolved."),
+(5,"Resolved", "Issue in the customer and order tables. They've been dropped...forever"),
+(6,"Resolved", "Got rid of employee sub-types and added a tag in the employee table to identify roles");
 
 INSERT INTO Photo(PhotoData)
 VALUES

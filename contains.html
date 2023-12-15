@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Research</title>
+        <link rel="stylesheet" href="public/css/foundation.css">
+        <link rel="stylesheet" href="public/css/style.css">
+    </head>
+
+<body>
+    <div class="grid-container">
+        <!-- `grid-x` represents a row -->
+        <a href="./index.html" target="_parent">
+            <button type="button">Home</button>
+        </a>
+    </div>
+ 
+    <div class="grid-x grid-padding-x"> 
+        <div class="cell small-12 large-12">      
+            <h1 style="font-family: 'Comic Sans MS' ">Find Rock Children</h1>
+        </div>
+    </div>
+
+    <form action="/contain" method="post" id="myForm">
+      <div class="grid-container">
+          <div class="grid-x grid-padding-x">
+            
+            <label for="choice">Find Children Of:</label>
+            <select name="choice" id="choice">
+              <option value="Waypoint">Waypoint</option>
+              <option value="Macrostructure">Macrostructure</option>
+              <option value="Mesostructure">Mesostructure</option>
+          </select>
+
+              <div class="cell small-6 large-12">
+                  <label for="RockID">RockID:</label>
+                  <input type="text" id="RockID" name="RockID" placeholder="Ex: 999">
+              </div>
+
+              <div class="cell small-12 large-12">
+                <input style="cursor: pointer" type="submit" value="Submit">
+                </div>
+          </div>
+      </div>
+  </form>
+    
+      <script src="app.js"></script>
+</body>  
+</html>

@@ -143,6 +143,29 @@ function dbDelete(table, form_data) {
     });
 }
 
+function dbJoin(table1, table2, id) {
+    let query = "SELECT * FROM " + table1 + " RIGHT JOIN " + table2;
+    query += " ON " + table1 + "." + table1 + "ID = " + table2 + "." + table1 + "ID";
+
+    if (id != '') {
+        query += " WHERE " + table1 + "." + table1 + "ID = " + id;
+    }
+
+    query += " ORDER BY " + table1 + "." + table1 + "ID";
+
+    console.log(query);
+
+    return new Promise ((resolve) => {
+        db.all(query, (err, rows) => {
+            if (err) {
+                console.log(err);
+            } else {
+                resolve(rows);
+            }
+        });
+    });
+}
+
 app.get('', (req, res) => {
     res.sendFile(path.join(__dirname, 'WayPointCreation.html'));
     
@@ -256,19 +279,29 @@ app.post('/thin', (req, res) => {
     if (operation == "insert") {
         dbInsert(table, req.body);
         texture.forEach((e) => {
-            dbInsert("Texture", {ThinSectionID: req.body["ThinSectionID"], type: e});
+            if (e != '') {
+                dbInsert("Texture", {ThinSectionID: req.body["ThinSectionID"], type: e});
+            }
         });
         cement.forEach((e) => {
-            dbInsert("Cement", {ThinSectionID: req.body["ThinSectionID"], type: e});
+            if (e != '') {
+                dbInsert("Cement", {ThinSectionID: req.body["ThinSectionID"], type: e});
+            }
         });
         porosity.forEach((e) => {
-            dbInsert("Porosity", {ThinSectionID: req.body["ThinSectionID"], type: e});
+            if (e != '') {
+                dbInsert("Porosity", {ThinSectionID: req.body["ThinSectionID"], type: e});
+            }
         });
         minearlogy.forEach((e) => {
-            dbInsert("Minearlogy", {ThinSectionID: req.body["ThinSectionID"], type: e});
+            if (e != '') {
+                dbInsert("Minearlogy", {ThinSectionID: req.body["ThinSectionID"], type: e});
+            }
         });
         clastic_grain.forEach((e) => {
-            dbInsert("ClasticGrain", {ThinSectionID: req.body["ThinSectionID"], type: e});
+            if (e != '') {
+                dbInsert("ClasticGrain", {ThinSectionID: req.body["ThinSectionID"], type: e});
+            }
         });
     } else if (operation == "delete") {
         dbDelete(table, req.body);
@@ -420,6 +453,23 @@ app.post('/problem', (req, res) => {
         })
     }
 
+});
+
+app.post('/contain', (req, res) => {
+    let table1 = req.body.choice;
+    let table2 = "";
+    if (table1 == "Waypoint") {
+        table2 = "Macrostructure";
+    } else if (table1 == "Macrostructure") {
+        table2 = "Mesostructure";
+    } else if (table1 == "Mesostructure") {
+        table2 = "ThinSection";
+    }
+
+    let promise = dbJoin(table1, table2, req.body.RockID);
+    promise.then((results) => {
+        selectData(res, results, "contains");
+    });
 });
 
 app.post('/reset', (req, res) => {
