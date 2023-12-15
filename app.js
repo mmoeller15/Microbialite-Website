@@ -154,15 +154,21 @@ function selectData(res, results) {
     fs.readFile(__dirname + '/data.html', (err, template) => {
         let data = "";
         let response = template.toString();
+        
+        data = data + '<tr>';
+        for (const key in results[0]) {
+            data = data + '<th>' + key + '</th>';
+        }
+        data = data + '</tr>';
 
         for (let i = 0; i < results.length; i++) {
+
             data = data + '<tr>';
             for (const key in results[i]) {
                 data = data + '<td>' + results[i][key] + '</td>';
             }
             data = data + '</tr>';
         }
-
         response = response.replace('%%DATA%%', data);
         res.status(200).type('html').send(response);
     });
