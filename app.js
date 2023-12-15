@@ -150,11 +150,14 @@ app.get('', (req, res) => {
 });
 
 
-function selectData(res, results) {
+function selectData(res, results, table) {
     fs.readFile(__dirname + '/data.html', (err, template) => {
         let data = "";
         let response = template.toString();
-        
+        console.log(table)
+
+        response = response.replace('%%TITLE%%', table);
+
         data = data + '<tr>';
         for (const key in results[0]) {
             data = data + '<th>' + key + '</th>';
@@ -177,7 +180,7 @@ function selectData(res, results) {
 
 app.post('/way', (req, res) => {
     let operation = req.body["operation"];
-    let table = "Waypoint"
+    let table = "Waypoint";
     delete req.body.operation;
     if (operation == "insert") {
         dbInsert(table, req.body);
@@ -189,14 +192,14 @@ app.post('/way', (req, res) => {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
             console.log(results);
-            selectData(res, results);
+            selectData(res, results, table);
         })
     }
 });
 
 app.post('/macro', (req, res) => {
     let operation = req.body["operation"];
-    let table = "Macrostructure"
+    let table = "Macrostructure";
     delete req.body.operation;
     if (operation == "insert") {
         dbInsert(table, req.body);
@@ -208,7 +211,7 @@ app.post('/macro', (req, res) => {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
             console.log(results);
-            selectData(res, results);
+            selectData(res, results, table);
         })
     }
 });
@@ -217,7 +220,7 @@ app.post('/macro', (req, res) => {
 
 app.post('/meso', (req, res) => {
     let operation = req.body["operation"];
-    let table = "Mesostructure"
+    let table = "Mesostructure";
     delete req.body.operation;
     if (operation == "insert") {
         dbInsert(table, req.body);
@@ -229,12 +232,18 @@ app.post('/meso', (req, res) => {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
             console.log(results);
-            selectData(res, results);
+            selectData(res, results, table);
         })
     }
 });
 
-app.post('/thin', (req, res) => {});
+app.post('/thin', (req, res) => {
+
+
+
+
+    
+});
 
 
 
@@ -254,7 +263,7 @@ app.post('/photo', (req, res) => {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
             console.log(results);
-            selectData(res, results);
+            selectData(res, results, table);
         })
     }
 
@@ -275,13 +284,22 @@ app.post('/employee', (req, res) => {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
             console.log(results);
-            selectData(res, results);
+            selectData(res, results, table);
         })
     }
 });
-app.post('/analyze', (req, res) => {});
-app.post('/problem', (req, res) => {
+app.post('/analyze', (req, res) => {
 
+
+
+
+
+
+
+});
+
+
+app.post('/problem', (req, res) => {
     let operation = req.body["operation"];
     let table = "ProblemLog"
     delete req.body.operation;
@@ -295,7 +313,7 @@ app.post('/problem', (req, res) => {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
             console.log(results);
-            selectData(res, results);
+            selectData(res, results, table);
         })
     }
 
