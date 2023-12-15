@@ -186,11 +186,6 @@ app.post('/way', (req, res) => {
             selectData(res, results);
         })
     }
-
-
-   
-    
-    //res.sendFile(__dirname + '/WaypointData.html');
 });
 
 app.post('/macro', (req, res) => {});
@@ -217,6 +212,49 @@ app.post('/employee', (req, res) => {
 });
 app.post('/analyze', (req, res) => {});
 app.post('/problem', (req, res) => {});
+
+app.post('/reset', (req, res) => {
+    const data_delete = fs.readFileSync('./sql/ProjectPhase5DataDelete.sql', { encoding: 'utf8', flag: 'r' });
+    const table_drop = fs.readFileSync('./sql/ProjectPhase5TableDrop.sql', { encoding: 'utf8', flag: 'r' });
+    const table_create = fs.readFileSync('./sql/ProjectPhase5TableCreation.sql', { encoding: 'utf8', flag: 'r' });
+    const data_insert = fs.readFileSync('./sql/ProjectPhase5DataInsert.sql', { encoding: 'utf8', flag: 'r' });
+    
+    let delete_arr = data_delete.split(';');
+    let table_drop_arr = table_drop.split(';');
+    let table_create_arr = table_create.split(';');
+    let data_insert_arr = data_insert.split(';');
+
+    db.serialize(() => {
+        delete_arr.forEach((e) => {
+            db.all(e + ';', (err) => {
+                if (err) {
+                    console.log(err)
+                }
+            });
+        });
+        table_drop_arr.forEach((e) => {
+            db.all(e + ';', (err) => {
+                if (err) {
+                    console.log(err)
+                }
+            });
+        });
+        table_create_arr.forEach((e) => {
+            db.all(e + ';', (err) => {
+                if (err) {
+                    console.log(err)
+                }
+            });
+        })
+        data_insert_arr.forEach((e) => {
+            db.all(e + ';', (err) => {
+                if (err) {
+                    console.log(err)
+                }
+            });
+        });
+    });
+});
 
 server.listen(3000, () => {
     console.log("Server listening on port: 3000");
