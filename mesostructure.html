@@ -21,222 +21,100 @@
             font-style: italic;
             font-size: 1.1rem;
         } 
-
-        .error {
-            border-style: solid;
-            border-width: 2px;
-            border-color: red;
-            background: pink;
-        }            
+         
     </style>
 </head>
 
 <body>
-    <!-- MAIN CONTENT -->
-    <div class="off-canvas-content" data-off-canvas-content>
-        <div class="grid-container">
-            <div class="grid-x grid-padding-x"> 
-                <div class="cell small-11 medium-10 large-10 headstyle">
-                    <h1>Microbialite Database</h1>
-                </div>
-            </div>
-
-            <div class="grid-x grid-padding-x"> 
-                <div class="cell small-11 medium-10 large-10 headstyle">
-                    <form id="operationForm">
-                        <label for="operation">Choose an operation:</label>
-                        <select id="operation" name="operation">
-                          <option value="select">SELECT</option>
-                          <option value="insert">INSERT</option>
-                          <option value="delete">DELETE</option>
-                        </select>
-                        <br><br><br>
-                    </form>
-                </div>
-            </div>
-
-            <div class="grid-x grid-padding-x"> 
-                <div class="cell small-10 medium-10 large-10">
-                    <!--- inputs --->
-                    <form id="addmeso" title="addmeso">
-                        <div class="row">
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>Mesostructure ID
-                                <input type="text" id="mesostructureID" name="MesostructureID" placeholder="Enter a MesostructureID">
-                                </label>
-                            </div>
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>Macrostructure ID
-                                <input type="text" id="macrostructureID" name="MacrostructureID" placeholder="Enter a MacrostructureID">
-                                </label>
-                            </div>
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>Type
-                                <input type="text" id="mesotype" name="MesostructureType" placeholder="Enter a Mesostructure Type">
-                                </label>
-                            </div>
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>IGSN Intl Geo Sample
-                                <input type="text" id="igsn" name="igsn" placeholder="Enter IGSN">
-                                </label>
-                            </div>
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>FRU Interval:</label>
-                                <select id="fru">
-                                    <option value="True">Yes</option>
-                                    <option value="False">No</option>
-                                </select>
-                            </div>
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>Thin Section Priority
-                                <input type="text" id="tsprio" name="thinSectionPriority" placeholder="Enter Thin Section Priority">
-                                </label>
-                            </div>
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>Thin Section Made:</label>
-                                <select id="tsm">
-                                    <option value="True">Yes</option>
-                                    <option value="False">No</option>
-                                </select>
-                            </div>
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>Field Description
-                                <input type="text" id="fdesc" name="fieldDesc" placeholder="Enter Field Description">
-                                </label>
-                            </div>
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>Rock Description
-                                <input type="text" id="rdesc" name="rockDesc" placeholder="Enter Rock Description">
-                                </label>
-                            </div>
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>Comments
-                                <input type="text" id="com" name="comments" placeholder="Enter additional comments">
-                                </label>
-                            </div>
-                            <div class="small-12 columns large-8 form-input">
-                                <!--- submit --->
-                                <button id="mesosub">submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-
+    <div class="grid-container">
+        <!-- `grid-x` represents a row -->
+        <a href="./index.html" target="_parent">
+            <button type="button">Home</button>
+        </a>
+    </div>
+ 
+    <div class="grid-x grid-padding-x"> 
+        <div class="cell small-12 large-6">      
+            <h1 style="font-family: 'Comic Sans MS' ">Mesostructure Data</h1>
+            <p>Welcome to the thin section data page. Please enter information that correlates with each attribute: </p>
         </div>
-
     </div>
 
+    <form action="/thin" method="post" id="myForm">
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <label for="operation">Choose an operation:</label>
+                <select id="operation" name="operation">
+                    <option value="select">SELECT</option>
+                    <option value="insert">INSERT</option>
+                    <option value="delete">DELETE</option>
+                    <option value="update">UPDATE</option>
+                </select>
+
+                <!---INPUTS --->
+                <div class="cell small-6 large-12">
+                    <label>MesostructureID: </label>
+                    <input type="text" id="mesostructureID" name="mesostructureID" placeholder="Enter a mesostructureID">
+                </div>
+
+                <div class="cell small-6 large-12">
+                    <label>MacrostructureID: </label>
+                    <input type="text" id="macrostructureID" name="macrostructureID" placeholder="Enter a macrostructureID">
+                </div>
+
+                <div class="cell small-6 large-12">
+                    <label>Type: </label>
+                    <input type="text" id="mesotype" name="MesostructureType" placeholder="Enter a Mesostructure Type">
+                </div>
+
+                <div class="cell small-12 large-6">
+                    <label>IGSN Intl Geo Sample: </label>
+                    <input type="text" id="igsn" name="igsn" placeholder="Enter IGSN">
+                </div>
+
+                <label>FRU Interval: </label>
+                <select id="fru">
+                    <option value = ""></option>
+                    <option value="True">Yes</option>
+                    <option value="False">No</option>
+                </select>
+
+                <div class="cell small-12 large-6">
+                    <label>Thin Section Priority: </label>
+                    <input type="text" id="tsprio" name="thinSectionPriority" placeholder="Enter Thin Section Priority">
+                </div>
+
+                <label>Thin Section Made: </label>
+                <select id="tsm">
+                    <option value = ""></option>
+                    <option value="True">Yes</option>
+                    <option value="False">No</option>
+                </select>
+
+                <div class="cell small-12 large-6">
+                    <label>Field Description: </label>
+                    <input type="text" id="fdesc" name="fieldDesc" placeholder="Enter Field Description">    
+                </div>
+
+                <div class="cell small-12 large-6">
+                    <label>Rock Description: </label>
+                    <input type="text" id="rdesc" name="rockDesc" placeholder="Enter Rock Description">
+                </div>
+
+                <div class="cell small-12 large-6">
+                    <label>Comments: </label>
+                    <input type="text" id="com" name="comments" placeholder="Enter additional comments">
+                </div>
+
+                <div class="cell small-12 large-12">
+                <input type="submit" value="Submit">
+                </div>
+            </div>
+        </div>
+    </form>
+
     <!-- javascript -->
-    <script type="application/javascript">
-        let mesosub = document.getElementById("mesosub");
-
-        const validateForm = () => {
-            let containsErrors = false;
-            const f_inputs = document.getElementById("addmeso");
-
-            for (let i=2; i<10; i++){
-                if (f_inputs[i].value.length == 0){
-                    f_inputs[i].value = "NULL";
-                }
-            }
-
-            let structure = {
-                mesoid : f_inputs[0].value, //int auto increment
-                macroid : f_inputs[1].value, //int not null?
-                type: f_inputs[2].value, //VARCHAR(255)
-                igsn: f_inputs[3].value, //VARCHAR(255)
-                fru: f_inputs[4].value, //BOOLEAN
-                tsprio: f_inputs[5].value, //BIGINT
-                tsm: f_inputs[6].value, //BOOLEAN
-                fdesc: f_inputs[7].value, //TEXT
-                rdesc: f_inputs[8].value, //TEXT
-                com: f_inputs[9].value //TEXT
-            }
-
-            //conditions
-            if (f_inputs[0].value.length == 0){
-                f_inputs[0].classList.add('error');
-                containsErrors = true;
-            } else {
-                f_inputs[0].classList.remove('error');
-            }
-
-            if (f_inputs[1].value.length == 0){
-                f_inputs[1].classList.add('error');
-                containsErrors = true;
-            } else {
-                f_inputs[1].classList.remove('error');
-            }
-
-            if (f_inputs[2].value.length > 255){
-                f_inputs[2].classList.add('error');
-                containsErrors = true;
-            } else {
-                f_inputs[2].classList.remove('error');
-            }
-
-            if (f_inputs[3].value.length > 255){
-                f_inputs[3].classList.add('error');
-                containsErrors = true;
-            } else {
-                f_inputs[3].classList.remove('error');
-            }
-
-            if (f_inputs[5].value == "NULL"){
-                f_inputs[5].classList.remove('error');
-            } else if (isNaN(f_inputs[4].value)){
-                f_inputs[5].classList.add('error');
-                containsErrors = true;
-            } else {
-                f_inputs[5].classList.remove('error');
-            }
-        
-            if (containsErrors == false) {
-                addQuery(structure);
-                // clean
-                for (let i = 0; i < f_inputs.length; i++) {
-                    f_inputs[i].value = "";
-                }
-                containsErrors = false;
-            }
-        };
-
-        const addQuery = (structure) => {
-            event.preventDefault();
-            const selectedOperation = document.getElementById('operation').value;
-            let query = "";
-            let mesostructureID = document.getElementById('mesostructureID').value;
-
-            if(selectedOperation === "select"){
-              query = `SELECT * FROM Mesostructure WHERE MesostructureID = ${mesostructureID} `;
-            } else if(selectedOperation === "delete"){
-              query = `DELETE FROM Mesostructure WHERE MesostructureID = ${mesostructureID}`;
-            }else {
-              query = 'INSERT INTO Mesostructure VALUES ('+ structure.mesoid+', '+structure.macroid +', '+ structure.type+', NULL, NULL, NULL, NULL, NULL, NULL, "'+structure.igsn +'", '+structure.fru+', '+structure.tsprio+', '+structure.tsm+', '+structure.fdesc+', "'+structure.rdesc+'", '+structure.com+");";
-            }
-
-            const mesoQuery = 'SELECT MAX(MesostructureID) FROM Mesostructure'
-
-            console.log(query);
-            window.alert("Query Made");
-
-            // Clear input fields
-            structure.macroid.value = '';
-            structure.type.value = '';
-            structure.igsn.value = '';
-            structure.fru.value = '';
-            structure.tsprio.value = '';
-            structure.tsm.value = '';
-            structure.fdesc.value = '';
-            structure.rdesc.value = '';
-            structure.com.value = '';
-        }
-  
-        mesosub.addEventListener('click', validateForm);
-    </script>
-
+    <script src="app.js"></script>
     <!-- include before closing <body> tag -->
     <script src="public/js/vendor/jquery.js"></script>
     <script src="public/js/vendor/what-input.js"></script>
