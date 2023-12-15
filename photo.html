@@ -43,20 +43,8 @@
     </div>
 
 
-    
 
 
-
-
-    <form id="operationForm">
-      <label for="operation">Choose an operation:</label>
-      <select id="operation" name="operation">
-        <option value="select">SELECT</option>
-        <option value="insert">INSERT</option>
-        <option value="delete">DELETE</option>
-      </select>
-      <br><br><br>
-    </form>
 
     <div class="row">
         <div class="small-12 columns">
@@ -65,10 +53,18 @@
 
       <label for="choice">What type of data does this photo belong to?</label>
       <select name="choice" id="choice">
-        <option value="macrostructure">Macrostructure</option>
-        <option value="mesostructure">Mesostructure</option>
-        <option value="thin_section">Thin Section</option>
+        <option value="Macrostructure">Macrostructure</option>
+        <option value="Mesostructure">Mesostructure</option>
+        <option value="ThinSection">Thin Section</option>
     </select>
+    <label for="operation">Choose an operation:</label>
+    <select id="operation" name="operation">
+      <option value="select">SELECT</option>
+      <option value="insert">INSERT</option>
+      <option value="delete">DELETE</option>
+    </select>
+    <br><br><br>
+  </form>
       <br><br><br>
 
 
@@ -81,8 +77,8 @@
                 <label>PhotoData
                  <input id="photoData" type="text" name="photoData" placeholder="Photo data path...">
                 </label>
-                 <label>DataID 
-                  <input id="DataID" type="text" name="DataID" placeholder="(MacrostructureID,ThinID,etc. )">
+                 <label>RockID 
+                  <input id="RockID" type="text" name="RockID " placeholder="(MacrostructureID,ThinID,etc. )">
                  </label>
               </div>
               <div class="small-12 columns form-input">
