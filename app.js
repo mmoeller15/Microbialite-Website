@@ -250,6 +250,8 @@ app.post('/thin', (req, res) => {
 app.post('/photo', (req, res) => {
     let operation = req.body["operation"];
     let table = "Photo"
+    let table2 = req.body["choice"] + "Photo";
+    delete req.body.choice;
     delete req.body.operation;
     if (operation == "insert") {
         dbInsert(table, req.body);

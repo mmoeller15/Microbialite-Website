@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Employee Data</title>
+        <link rel="stylesheet" href="pulic/css/foundation.css">
+        <link rel="stylesheet" href="public/css/style.css">  
+
+        <style>
+            body{
+                background-color: pink;
+            }
+             textarea, input, button, label, p{
+                font-family: "Comic Sans MS";
+                font-style: italic;
+                font-size: 1.1rem;
+            }
+
+            .form-input {
+                margin-bottom: 15px; 
+                font-family: "Comic Sans MS";
+                font-style: italic;
+                font-size: 1.1rem;
+            }             
+        </style>
+    </head>
+
+<body>
+    <div class="grid-container">
+        <!-- `grid-x` represents a row -->
+        <a href="./index.html" target="_parent">
+            <button type="button">Home</button>
+        </a>
+    </div>
+ 
+    <div class="grid-x grid-padding-x"> 
+        <div class="cell small-12 large-6">      
+            <h1 style="font-family: 'Comic Sans MS' ">Research Data</h1>
+        </div>
+    </div>
+
+    <form action="/analyze" method="post" id="myForm">
+      <div class="grid-container">
+          <div class="grid-x grid-padding-x">
+            
+            <label for="choice">What is being worked on?</label>
+            <select name="choice" id="choice">
+              <option value="macrostructure">Macrostructure</option>
+              <option value="mesostructure">Mesostructure</option>
+              <option value="thin_section">Thin Section</option>
+          </select>
+
+            <label for="operation">Choose an operation:</label>
+            <select id="operation" name="operation">
+                <option value="select">SELECT</option>
+                <option value="insert">INSERT</option>
+                <option value="delete">DELETE</option>
+                <option value="update">UPDATE</option>
+            </select>
+
+              <div class="cell small-6 large-12">
+                  <label for="ResearcherID">EmployeeID:</label>
+                  <input type="text" id="ResearcherID" name="ResearcherID" placeholder="Ex: 999">
+              </div>
+
+              <div class="cell small-6 large-12">
+                  <label for="RockID">RockID:</label>
+                  <input type="text" id="RockID" name="RockID" placeholder="Ex: 999">
+              </div>
+              <div class="cell small-12 large-12">
+              <input type="submit" value="Submit">
+              </div>
+          </div>
+      </div>
+  </form>
+    
+      <script src="app.js"></script>
+</body>  
+</html>
