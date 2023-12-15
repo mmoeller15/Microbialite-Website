@@ -238,11 +238,93 @@ app.post('/meso', (req, res) => {
 });
 
 app.post('/thin', (req, res) => {
+    console.log(req.body);
+    let table = "ThinSection";
+    let operation = req.body["operation"];
+    delete req.body.operation
+    let texture = req.body["Texture"].split(",");
+    let cement = req.body["Cement"].split(",");
+    let porosity = req.body["Porosity"].split(",");
+    let minearlogy = req.body["Minearlogy"].split(",");
+    let clastic_grain = req.body["ClasticGrain"].split(",");
 
+    delete req.body.Texture;
+    delete req.body.Cement;
+    delete req.body.Porosity;
+    delete req.body.Minearlogy;
+    delete req.body.ClasticGrain;
 
+    if (operation == "insert") {
+        dbInsert(table, req.body);
+        texture.forEach((e) => {
+            dbInsert("Texture", {ThinSectionID: req.body["ThinSectionID"], type: e});
+        });
+        cement.forEach((e) => {
+            dbInsert("Cement", {ThinSectionID: req.body["ThinSectionID"], type: e});
+        });
+        porosity.forEach((e) => {
+            dbInsert("Porosity", {ThinSectionID: req.body["ThinSectionID"], type: e});
+        });
+        minearlogy.forEach((e) => {
+            dbInsert("Minearlogy", {ThinSectionID: req.body["ThinSectionID"], type: e});
+        });
+        clastic_grain.forEach((e) => {
+            dbInsert("ClasticGrain", {ThinSectionID: req.body["ThinSectionID"], type: e});
+        });
+    } else if (operation == "delete") {
+        dbDelete(table, req.body);
+    } else if (operation == "update") {
+        dbUpdate(table, req.body);
+    } else if (operation == "select") {
+        let promise = dbSelect(table, req.body);
+        promise.then((results) => {
+            for (let i = 0; i < results.length; i++) {
+                let tex = dbSelect("Texture", {ThinSectionID: results[i]["ThinSectionID"].toString()});
+                let cem = dbSelect("Cement", {ThinSectionID: results[i]["ThinSectionID"].toString()});
+                let por = dbSelect("Porosity", {ThinSectionID: results[i]["ThinSectionID"].toString()});
+                let min = dbSelect("Minearlogy", {ThinSectionID: results[i]["ThinSectionID"].toString()});
+                let cla = dbSelect("ClasticGrain", {ThinSectionID: results[i]["ThinSectionID"].toString()});
 
-
-    
+                Promise.all([tex, cem, por, min, cla]).then((values) => {   
+                    if (typeof values[0] !== 'undefined') {
+                        results[i]["Texture"] = '';
+                        values[0].forEach((e) => {
+                            results[i]["Texture"] += e.type + ",";
+                        });
+                    }
+                   
+                    if (typeof values[1] !== 'undefined') {
+                        results[i]["Cement"] = '';
+                        values[1].forEach((e) => {
+                            results[i]["Cement"] += e.type + ",";
+                        });
+                    }
+                
+                    if (typeof values[2] !== 'undefined') {
+                        results[i]["Porosity"] = '';
+                        values[2].forEach((e) => {
+                            results[i]["Porosity"] += e.type + ",";
+                        });
+                    }
+                 
+                    if (typeof values[3] !== 'undefined') {
+                        results[i]["Minearlogy"] = '';
+                        values[3].forEach((e) => {
+                            results[i]["Minearlogy"] += e.type + ","; 
+                        });
+                    }
+                                        
+                    if (typeof values[4] !== 'undefined') {
+                        results[i]["ClasticGrain"] = '';
+                        values[4].forEach((e) => {
+                            results[i]["ClasticGrain"] += e.type + ",";
+                        });
+                    }
+                });
+            }
+            selectData(res, results, table);
+        })
+    }
 });
 
 
