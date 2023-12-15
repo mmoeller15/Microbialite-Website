@@ -43,15 +43,7 @@
     </div>
 
 
-    <form id="choiceForm">
-      <label for="choice">What type of data does this photo belong to?</label>
-      <select name="choice" id="choice">
-        <option value="macrostructure">Macrostructure</option>
-        <option value="mesostructure">Mesostructure</option>
-        <option value="thin_section">Thin Section</option>
-    </select>
-      <br><br><br>
-    </form>
+    
 
 
 
@@ -68,17 +60,29 @@
 
     <div class="row">
         <div class="small-12 columns">
-          <form id="userDataForm">
+          <form action="/photo" method="post" id="myForm">
+
+
+      <label for="choice">What type of data does this photo belong to?</label>
+      <select name="choice" id="choice">
+        <option value="macrostructure">Macrostructure</option>
+        <option value="mesostructure">Mesostructure</option>
+        <option value="thin_section">Thin Section</option>
+    </select>
+      <br><br><br>
+
+
+
             <div class="row">
               <div class="small-12 medium-6 columns form-input">
                 <label>PhotoID
-                  <input id="photoID" type="text" name="KeyPhotoID" placeholder="PhotoID">
+                  <input id="PhotoID" type="text" name="PhotoID" placeholder="PhotoID">
                  </label>
-                <label>Photo Data
-                 <input id="photoData" type="text" name="photo_data" placeholder="Photo data path...">
+                <label>PhotoData
+                 <input id="photoData" type="text" name="photoData" placeholder="Photo data path...">
                 </label>
                  <label>DataID 
-                  <input id="dataID" type="text" name="photo_data" placeholder="(MacrostructureID,ThinID,etc. )">
+                  <input id="DataID" type="text" name="DataID" placeholder="(MacrostructureID,ThinID,etc. )">
                  </label>
               </div>
               <div class="small-12 columns form-input">
@@ -86,14 +90,18 @@
               </div>
             </div>
           </form>
+          
+    <script src="app.js"></script>
+
         </div>
       </div>
     
-
+  </body>
+  </html>
 
        
 
-
+<!-- 
       <script>
         document.getElementById('userDataForm').addEventListener('submit', function(event) {
         
@@ -151,6 +159,4 @@
             console.log(query2);
             window.alert("Query Made");
           });
-          </script>
-</body>  
-</html>
+          </script> -->
