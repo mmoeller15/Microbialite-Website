@@ -4,7 +4,6 @@ var http = require('http');
 var bodyParser = require('body-parser');
 
 var fs = require('fs');
-const { waitForDebugger } = require('inspector');
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
@@ -397,7 +396,7 @@ app.post('/analyze', (req, res) => {
         let promise = dbSelect(table, req.body);
         promise.then((results) => {
             console.log(results);
-            selectData(res, results);
+            selectData(res, results, table);
         })
     }
 });
