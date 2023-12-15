@@ -21,169 +21,72 @@
             font-style: italic;
             font-size: 1.1rem;
         } 
-
-        .error {
-            border-style: solid;
-            border-width: 2px;
-            border-color: red;
-            background: pink;
-        }            
+           
     </style>
 </head>
 
 <body>
-    <!-- MAIN CONTENT -->
-    <div class="off-canvas-content" data-off-canvas-content>
-        <div class="grid-container">
-            <div class="grid-x grid-padding-x"> 
-                <div class="cell small-11 medium-10 large-10 headstyle">
-                    <h1>Microbialite Database</h1>
-                </div>
-            </div>
-
-            <div class="grid-x grid-padding-x"> 
-                <div class="cell small-11 medium-10 large-10 headstyle">
-                    <form id="operationForm">
-                        <label for="operation">Choose an operation:</label>
-                        <select id="operation" name="operation">
-                          <option value="select">SELECT</option>
-                          <option value="insert">INSERT</option>
-                          <option value="delete">DELETE</option>
-                        </select>
-                        <br><br><br>
-                    </form>
-                </div>
-            </div>
-
-            <div class="grid-x grid-padding-x"> 
-                <div class="cell small-10 medium-10 large-10">
-                    <!--- inputs --->
-                    <form id="thinform" title="thinform">
-                        <div class="row">
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>ThinSectionID
-                                <input type="text" id="thinSectionID" name="thinSectionID" placeholder="Enter a thinSectionID">
-                                </label>
-                            </div>
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>MesostructureID
-                                <input type="text" id="mesostructureID" name="mesostructureID" placeholder="Enter a mesostructureID">
-                                </label>
-                            </div>
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>Subsample
-                                <input type="text" id="subsample" name="subsample" placeholder="Enter subsample">
-                                </label>
-                            </div>
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>Description
-                                <input type="text" id="desc" name="desc" placeholder="Enter description">
-                                </label>
-                            </div>
-                            <div class="small-12 medium-6 large-8 columns form-input">
-                                <label>Analysis Complete</label>
-                                <select id="analysis">
-                                    <option value="True">Yes</option>
-                                    <option value="False">No</option>
-                                </select>
-                            </div>
-                            <div class="small-12 columns large-8 form-input">
-                                <!--- submit --->
-                                <button id="thinsub">submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-
+    <div class="grid-container">
+        <!-- `grid-x` represents a row -->
+        <a href="./index.html" target="_parent">
+            <button type="button">Home</button>
+        </a>
+    </div>
+ 
+    <div class="grid-x grid-padding-x"> 
+        <div class="cell small-12 large-6">      
+            <h1 style="font-family: 'Comic Sans MS' ">Thin Section Data</h1>
+            <p>Welcome to the thin section data page. Please enter information that correlates with each attribute: </p>
         </div>
-
     </div>
 
-    <!-- javascript -->
-    <script type="application/javascript">
-        let thinsub = document.getElementById("thinsub");
+    <form action="/thin" method="post" id="myForm">
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <label for="operation">Choose an operation:</label>
+                <select id="operation" name="operation">
+                    <option value="select">SELECT</option>
+                    <option value="insert">INSERT</option>
+                    <option value="delete">DELETE</option>
+                    <option value="update">UPDATE</option>
+                </select>
 
-        const validateForm = () => {
-            let containsErrors = false;
-            const f_inputs = document.getElementById("thinform");
+                <!---INPUTS --->
+                <div class="cell small-6 large-12">
+                    <label>ThinSectionID: </label>
+                    <input type="text" id="thinSectionID" name="thinSectionID" placeholder="Enter a thinSectionID">
+                </div>
 
-            let section = {
-                thinid : f_inputs[0].value, //int auto increment
-                mesoid : f_inputs[1].value, //int not null
-                subsample : f_inputs[2].value, //VARCHAR(255)
-                desc: f_inputs[3].value, //TEXT
-                analysis: f_inputs[4].value //BOOLEAN
-            }
+                <div class="cell small-6 large-12">
+                    <label>MesostructureID: </label>
+                    <input type="text" id="mesostructureID" name="mesostructureID" placeholder="Enter a mesostructureID">
+                </div>
 
-            //conditions
-            if (f_inputs[0].value.length == 0){
-                f_inputs[0].classList.add('error');
-                containsErrors = true;
-            } else if (isNaN(f_inputs[0].value)){
-                f_inputs[0].classList.add('error');
-                containsErrors = true;
-            } else {
-                f_inputs[0].classList.remove('error');
-            }
+                <div class="cell small-12 large-6">
+                    <label>Subsample: </label>
+                    <input type="text" id="subsample" name="subsample" placeholder="Enter subsample">
+                </div>
 
-            if (f_inputs[1].value.length == 0){
-                f_inputs[1].classList.add('error');
-                containsErrors = true;
-            } else if (isNaN(f_inputs[1].value)){
-                f_inputs[1].classList.add('error');
-                containsErrors = true;
-            } else {
-                f_inputs[1].classList.remove('error');
-            }
+                <div class="cell small-12 large-6">
+                    <label>Description: </label>
+                    <input type="text" id="desc" name="desc" placeholder="Enter description">
+                </div>
 
-            if (f_inputs[2].value.length > 255){
-                f_inputs[2].classList.add('error');
-                containsErrors = true;
-            } else {
-                f_inputs[2].classList.remove('error');
-            }
+                <label for="Analysis">Analysis Complete</label>
+                <select id="analysis" name="analysis">
+                    <option value = ""></option>
+                    <option value="True">Yes</option>
+                    <option value="False">No</option>
+                </select>
 
-        
-            if (containsErrors == false) {
-                addQuery(section);
-                // clean
-                for (let i = 0; i < 4; i++) {
-                    f_inputs[i].value = "";
-                }
-                containsErrors = false;
-            }
-        };
+                <div class="cell small-12 large-12">
+                <input type="submit" value="Submit">
+                </div>
+            </div>
+        </div>
+    </form>
 
-        const addQuery = (section) => {
-            event.preventDefault();
-            const selectedOperation = document.getElementById('operation').value;
-            let query = "";
-            let thinSectionID = document.getElementById('thinSectionID').value;
-
-            if(selectedOperation === "select"){
-              query = `SELECT * FROM ThinSection WHERE ThinSectionID = ${thinSectionID} `;
-            } else if(selectedOperation === "delete"){
-              query = `DELETE FROM ThinSection WHERE ThinSectionID = ${thinSectionID}`;
-            }else {
-              query = 'INSERT INTO ThinSection VALUES ('+ section.thinid+', '+section.mesoid +', '+ section.subsample+', '+section.desc +', '+section.analysis+");";
-            }
-
-            console.log(query);
-            window.alert("Query Made");
-
-            // Clear input fields
-            section.thinid.value = '';
-            section.mesoid.value = '';
-            section.subsample.value = '';
-            section.desc.value = '';
-            section.analysis.value = '';
-        }
-  
-        thinsub.addEventListener('click', validateForm);
-    </script>
-
+    <script src="app.js"></script>
     <!-- include before closing <body> tag -->
     <script src="public/js/vendor/jquery.js"></script>
     <script src="public/js/vendor/what-input.js"></script>
