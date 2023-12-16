@@ -375,9 +375,9 @@ app.post('/photo', (req, res) => {
         dbUpdate(table, req.body);
     } else if (operation == "select") {
         delete req.body.RockID;
-        let promise = dbSelect(table, req.body);
+        let promise = dbSelect(table2, updatedJSON);
         promise.then((results) => {
-            selectData(res, results);
+            selectData(res, results, table2);
         })
     }
 });
