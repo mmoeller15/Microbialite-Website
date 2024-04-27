@@ -4,7 +4,11 @@ This website was created for CISC 450 Database Design in collaboration with Dr. 
 
 
 ## Application Setup
+Notes: Download and install VSCode and node.js if you don't have it already installed
 
 1. Clone project from GitHub into VSCode
 2. Open the terminal and `cd Microbialite-Website`
+3. Once in correct folder run `npm install` and by the end of the installation you should see a `node_modules` folder
+4. You can now run `node app.js` and you should see `Server listening on port:___` in the terminal
+5. 
 
