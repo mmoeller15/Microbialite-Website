@@ -6,4 +6,7 @@ This website was created for CISC 450 Database Design in collaboration with Dr. 
 ## Application Setup
 
 1. Clone project from GitHub into VSCode
-2. Open the terminal and ```cd Microbialite-Website```
+2. Open the terminal and 
+```html
+cd Microbialite-Website
+```
