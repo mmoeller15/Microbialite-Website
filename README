@@ -1,3 +1,9 @@
 # Microbialite Database Website
 
-This website was created for CISC 450 Database Design in collaboration with Dr. Hickson, a geology professor at the University of St. Thomas. The website was designed to interact with the Microbialite Database.
+This website was created for CISC 450 Database Design in collaboration with Dr. Hickson, a geology professor at the University of St. Thomas. The website was designed to interact with the Microbialite Database. The user interface uses JavaScript and node.js to create an API connecting the website to the sqlite3 database. Users are able to view, add, and delete data from the database.
+
+
+## Application Setup
+
+1. Clone project from GitHub into VSCode
+2. Open the terminal and ```cd Microbialite-Website```
