@@ -4,7 +4,7 @@ This website was a semester-long group project created for CISC 450 Database Des
 
 
 ## Application Setup
-Notes: Download and install VSCode and node.js if you don't have it already installed
+Notes: Download and install VSCode and node.js if you don't have them already installed
 
 1. Clone project from GitHub into VSCode
 2. Open the terminal with `Ctrl+~` and make sure you are in the Microbialites Website folder by runnig the command `cd Microbialite-Website`
