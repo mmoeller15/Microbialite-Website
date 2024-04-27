@@ -1,6 +1,6 @@
 # Microbialite Database Website
 
-This website was a semester-long group project created for CISC 450 Database Design in collaboration with Dr. Hickson, a geology professor at the University of St. Thomas. The website was designed to interact with the Microbialite Database. The user interface uses JavaScript. Node.js was used to create an API connecting the website to the sqlite3 database. Users are able to view, add, and delete data from the database.
+This website was a semester-long group project created for CISC 450 Database Design in collaboration with Dr. Hickson, a geology professor at the University of St. Thomas. The database was a vast, unorganized, collection of data gathered by Dr. Hickson and his team to study formations of Microbialites in Nevada. It was our job to normalize the data and create a user interface with which the data could be accessed by other researchers and where more data could be add or deleted. The website was designed to interact with the Microbialite Database. The user interface uses JavaScript. Node.js was used to create an API connecting the website to the sqlite3 database. Users are able to view, add, and delete data from the database.
 
 
 ## Application Setup
